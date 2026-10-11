@@ -23,7 +23,7 @@ One Python file, standard library only.
 
 ## Install
 
-Install it on the machine that hosts the T3 Code server.
+Install it on the machine that hosts the T3 Code server. `login` needs the `t3` command-line tool, which comes with the headless server install (`t3 serve`, `t3 service install`). The desktop app alone does not put `t3` on your PATH; in that case pass a token in `T3_IMPORT_TOKEN`.
 
 **As a herdr plugin**
 
@@ -55,13 +55,15 @@ Running it again is safe: sessions already in T3 Code are skipped.
 
 ```
 $ python3 t3_import.py import
-myrepo: 122 sessions in T3 Code, 2 skipped  (/home/me/code/myrepo)
+myrepo: 14 sessions in T3 Code, 0 skipped  (/home/me/code/myrepo)
 ```
 
 ## What you get
 
 - One T3 Code thread per session, with the chat history, in the project's **Settled** shelf.
-- Sending a message in that thread resumes the original session, so the model has the full context.
+- T3 Code stores each session id, so a message you send in that thread continues the original session with its full context.
+
+Continuing a chat is done by T3 Code, not by this tool, and I have only verified the import itself. [t3code#15243](https://github.com/pingdotgg/t3code/issues/15243) reports that on T3 Code builds newer than 0.0.45, the first follow-up in an imported Claude Code thread fails; Codex threads are reported unaffected.
 
 ## Every 5 minutes
 
@@ -106,7 +108,7 @@ Nothing is written to T3 Code's database directly, and transcripts are never mod
 
 ## Status
 
-Tested against T3 Code 0.0.45 on Linux. T3 Code is alpha and this RPC is internal, so a T3 Code update can break the tool. If it does, please open an issue with the output of `python3 t3_import.py scan`.
+Tested against T3 Code 0.0.45 on Linux, with the T3 Code server running as a background service. macOS is untested beyond the unit tests. T3 Code is alpha and this RPC is internal, so a T3 Code update can break the tool. If it does, please open an issue with the output of `python3 t3_import.py scan`.
 
 ```sh
 python3 -m unittest -v   # tests run against a fake T3 Code server

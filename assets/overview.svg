@@ -84,6 +84,6 @@
   <text x="904" y="260" class="sans" font-size="10.5" text-anchor="end" fill="#f0b45a">resumes</text>
 
   <!-- caption -->
-  <text x="480" y="324" class="sans" font-size="13.5" text-anchor="middle" fill="#c9d1d9">One import per session. Your next message in T3 Code resumes the original session.</text>
+  <text x="480" y="324" class="sans" font-size="13.5" text-anchor="middle" fill="#c9d1d9">One import per session. T3 Code keeps the session id, so the chat can continue there.</text>
   <text x="480" y="348" class="sans muted" font-size="12" text-anchor="middle">Works with any terminal: herdr, tmux, or a plain shell.</text>
 </svg>
