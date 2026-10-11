@@ -63,7 +63,7 @@ myrepo: 14 sessions in T3 Code, 0 skipped  (/home/me/code/myrepo)
 - One T3 Code thread per session, with the chat history, in the project's **Settled** shelf.
 - T3 Code stores each session id, so a message you send in that thread continues the original session with its full context.
 
-Continuing a chat is done by T3 Code, not by this tool, and I have only verified the import itself. [t3code#15243](https://github.com/pingdotgg/t3code/issues/15243) reports that on T3 Code builds newer than 0.0.45, the first follow-up in an imported Claude Code thread fails; Codex threads are reported unaffected.
+Continuing a chat is done by T3 Code, not by this tool; only the import itself has been verified. [t3code#15243](https://github.com/pingdotgg/t3code/issues/15243) reports that on T3 Code builds newer than 0.0.45, the first follow-up in an imported Claude Code thread fails; Codex threads are reported unaffected.
 
 ## Every 5 minutes
 
