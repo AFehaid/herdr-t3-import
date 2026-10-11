@@ -1,0 +1,21 @@
+id = "t3-import"
+name = "T3 Code Import"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Imports the Claude Code and Codex sessions running in your panes into T3 Code, so the same chats show up there."
+platforms = ["macos", "linux"]
+
+# One-off import for every T3 Code project. Sessions that are already in
+# T3 Code are skipped, so this is safe to run as often as you like.
+[[actions]]
+id = "import"
+title = "T3 Code: import terminal sessions"
+contexts = ["global", "workspace"]
+command = ["python3", "t3_import.py", "import"]
+
+# Read-only: which directories have sessions T3 Code could import.
+[[actions]]
+id = "scan"
+title = "T3 Code: list importable directories"
+contexts = ["global"]
+command = ["python3", "t3_import.py", "scan"]

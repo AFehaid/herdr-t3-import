@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" width="960" height="380" role="img" aria-labelledby="title desc">
+  <title id="title">How t3-import works</title>
+  <desc id="desc">Claude Code and Codex sessions running in terminal panes write transcripts to disk. t3-import asks T3 Code to import them, and the same chats appear in T3 Code as threads that resume the original session.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b949e"/>
+    </marker>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .sans { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .muted { fill: #8b949e; }
+      .text { fill: #e6edf3; }
+      .panel { fill: #161b22; stroke: #30363d; }
+      .row { fill: #0d1117; stroke: #30363d; }
+      .flow { stroke: #8b949e; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="959" height="379" rx="16" fill="#0d1117" stroke="#30363d"/>
+
+  <!-- terminal -->
+  <text x="32" y="40" class="sans muted" font-size="13">Your terminal</text>
+  <rect x="32" y="56" width="300" height="230" rx="10" class="panel"/>
+  <circle cx="50" cy="74" r="4" fill="#f85149"/>
+  <circle cx="64" cy="74" r="4" fill="#d29922"/>
+  <circle cx="78" cy="74" r="4" fill="#3fb950"/>
+  <text x="182" y="78" class="mono muted" font-size="12" text-anchor="middle">herdr</text>
+  <line x1="32" y1="92" x2="332" y2="92" stroke="#30363d"/>
+
+  <rect x="44" y="104" width="276" height="48" rx="6" class="row"/>
+  <rect x="54" y="118" width="52" height="20" rx="10" fill="#3d2a1e"/>
+  <text x="80" y="132" class="mono" font-size="11" text-anchor="middle" fill="#f0a67c">claude</text>
+  <text x="116" y="126" class="mono text" font-size="12">Fix flaky auth test</text>
+  <text x="116" y="142" class="mono" font-size="10.5" fill="#3fb950">working</text>
+
+  <rect x="44" y="162" width="276" height="48" rx="6" class="row"/>
+  <rect x="54" y="176" width="52" height="20" rx="10" fill="#17332c"/>
+  <text x="80" y="190" class="mono" font-size="11" text-anchor="middle" fill="#6fd8b5">codex</text>
+  <text x="116" y="184" class="mono text" font-size="12">Refactor the importer</text>
+  <text x="116" y="200" class="mono muted" font-size="10.5">idle</text>
+
+  <rect x="44" y="220" width="276" height="48" rx="6" class="row"/>
+  <rect x="54" y="234" width="52" height="20" rx="10" fill="#3d2a1e"/>
+  <text x="80" y="248" class="mono" font-size="11" text-anchor="middle" fill="#f0a67c">claude</text>
+  <text x="116" y="242" class="mono text" font-size="12">Write release notes</text>
+  <text x="116" y="258" class="mono muted" font-size="10.5">done</text>
+
+  <!-- middle -->
+  <path d="M338 128 H366" class="flow" marker-end="url(#arrow)"/>
+  <rect x="372" y="104" width="216" height="48" rx="8" fill="#161b22" stroke="#30363d" stroke-dasharray="4 3"/>
+  <text x="480" y="124" class="sans text" font-size="12" text-anchor="middle">session transcripts on disk</text>
+  <text x="480" y="141" class="mono muted" font-size="11" text-anchor="middle">~/.claude  ~/.codex</text>
+
+  <path d="M480 156 V180" class="flow" marker-end="url(#arrow)"/>
+  <rect x="392" y="186" width="176" height="52" rx="26" fill="#f0b45a"/>
+  <text x="480" y="209" class="mono" font-size="15" font-weight="700" text-anchor="middle" fill="#0d1117">t3-import</text>
+  <text x="480" y="226" class="sans" font-size="11" text-anchor="middle" fill="#3d2c0a">on demand or every 5 minutes</text>
+  <text x="480" y="260" class="sans muted" font-size="11" text-anchor="middle">calls T3 Code's own import</text>
+  <path d="M574 212 H620" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- T3 Code -->
+  <text x="628" y="40" class="sans muted" font-size="13">The same chats in T3 Code</text>
+  <rect x="628" y="56" width="300" height="230" rx="10" class="panel"/>
+  <circle cx="646" cy="74" r="4" fill="#f85149"/>
+  <circle cx="660" cy="74" r="4" fill="#d29922"/>
+  <circle cx="674" cy="74" r="4" fill="#3fb950"/>
+  <text x="778" y="78" class="sans muted" font-size="12" text-anchor="middle">T3 Code</text>
+  <line x1="628" y1="92" x2="928" y2="92" stroke="#30363d"/>
+  <text x="642" y="113" class="sans muted" font-size="10" letter-spacing="1">SETTLED</text>
+
+  <rect x="640" y="122" width="276" height="44" rx="6" class="row"/>
+  <text x="652" y="141" class="sans text" font-size="12.5">Fix flaky auth test</text>
+  <text x="652" y="156" class="sans muted" font-size="10.5">Claude</text>
+  <text x="904" y="156" class="sans" font-size="10.5" text-anchor="end" fill="#f0b45a">resumes</text>
+
+  <rect x="640" y="174" width="276" height="44" rx="6" class="row"/>
+  <text x="652" y="193" class="sans text" font-size="12.5">Refactor the importer</text>
+  <text x="652" y="208" class="sans muted" font-size="10.5">Codex</text>
+  <text x="904" y="208" class="sans" font-size="10.5" text-anchor="end" fill="#f0b45a">resumes</text>
+
+  <rect x="640" y="226" width="276" height="44" rx="6" class="row"/>
+  <text x="652" y="245" class="sans text" font-size="12.5">Write release notes</text>
+  <text x="652" y="260" class="sans muted" font-size="10.5">Claude</text>
+  <text x="904" y="260" class="sans" font-size="10.5" text-anchor="end" fill="#f0b45a">resumes</text>
+
+  <!-- caption -->
+  <text x="480" y="324" class="sans" font-size="13.5" text-anchor="middle" fill="#c9d1d9">One import per session. Your next message in T3 Code resumes the original session.</text>
+  <text x="480" y="348" class="sans muted" font-size="12" text-anchor="middle">Works with any terminal: herdr, tmux, or a plain shell.</text>
+</svg>

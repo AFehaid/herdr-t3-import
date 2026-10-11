@@ -1,0 +1,8 @@
+[Unit]
+Description=Import terminal Claude Code / Codex sessions into T3 Code
+After=t3code.service
+
+[Service]
+Type=oneshot
+# Point this at your checkout.
+ExecStart=/usr/bin/python3 %h/herdr-t3-import/t3_import.py import
