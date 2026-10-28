@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/daniel7an/herdr-t3-import/actions/workflows/test.yml"><img src="https://github.com/daniel7an/herdr-t3-import/actions/workflows/test.yml/badge.svg" alt="tests"></a>
   <img src="https://img.shields.io/badge/herdr-plugin-f0b45a" alt="herdr plugin">
-  <img src="https://img.shields.io/badge/T3%20Code-0.0.45-8b949e" alt="T3 Code 0.0.45">
+  <img src="https://img.shields.io/badge/T3%20Code-0.1.3%2B-8b949e" alt="T3 Code 0.1.3+">
   <img src="https://img.shields.io/badge/python-3.9%2B-3776ab" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/dependencies-none-3fb950" alt="no dependencies">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
@@ -28,7 +28,8 @@ Install it on the machine that hosts the T3 Code server. `login` needs the `t3` 
 **As a herdr plugin**
 
 ```sh
-herdr plugin install daniel7an/herdr-t3-import
+herdr plugin install AFehaid/herdr-t3-import
+# or: herdr plugin link ~/projects/herdr-t3-import --enabled
 ```
 
 This adds two actions: **T3 Code: import terminal sessions** and **T3 Code: list importable directories**.
@@ -108,7 +109,7 @@ Nothing is written to T3 Code's database directly, and transcripts are never mod
 
 ## Status
 
-Tested against T3 Code 0.0.45 on Linux, with the T3 Code server running as a background service. macOS is untested beyond the unit tests. T3 Code is alpha and this RPC is internal, so a T3 Code update can break the tool. If it does, please open an issue with the output of `python3 t3_import.py scan`.
+Fork of daniel7an/herdr-t3-import, patched for T3 Code 0.1.3+ (orchestration protocol 2 and `/api/projects`). Verified scan against the macOS desktop app local server. T3 Code is alpha and this RPC is internal, so a T3 Code update can break the tool.
 
 ```sh
 python3 -m unittest -v   # tests run against a fake T3 Code server

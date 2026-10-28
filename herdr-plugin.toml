@@ -1,6 +1,6 @@
 id = "t3-import"
 name = "T3 Code Import"
-version = "0.1.0"
+version = "0.1.1"
 min_herdr_version = "0.9.0"
 description = "Imports the Claude Code and Codex sessions running in your panes into T3 Code, so the same chats show up there."
 platforms = ["macos", "linux"]

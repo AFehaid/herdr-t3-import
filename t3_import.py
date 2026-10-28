@@ -6,6 +6,7 @@ T3 Code can import terminal sessions, but only from its first-run wizard
 can be run at any time, or on a timer.
 
 Runs on the machine that hosts the T3 Code server. Standard library only.
+Compatible with T3 Code 0.1.3+ (orchestration protocol 2).
 """
 
 from __future__ import annotations
@@ -58,10 +59,13 @@ def t3_binary() -> str:
     found = shutil.which("t3")
     if found:
         return found
+    bundled = t3_home() / "bin" / "t3"
+    if bundled.is_file() and os.access(bundled, os.X_OK):
+        return str(bundled)
     versions = sorted((t3_home() / "runtime" / "versions").glob("*/t3"))
     if versions:
         return str(versions[-1])
-    raise T3Error("Could not find the `t3` binary. Put it on PATH.")
+    raise T3Error("Could not find the `t3` binary. Put it on PATH or open T3 Code once.")
 
 
 def read_token() -> str:
@@ -205,8 +209,18 @@ def describe_failure(exit_value: dict) -> str:
 
 def rpc(origin: str, token: str, method: str, payload: dict):
     ticket = http_json(origin, token, "/api/auth/websocket-ticket", method="POST")["ticket"]
-    ws_url = "ws" + origin[len("http") :] + "/ws?wsTicket=" + urllib.parse.quote(ticket)
-    connection = WebSocket(ws_url, timeout=RPC_TIMEOUT_SECONDS)
+    # T3 Code 0.1.3+ requires orchestration protocol 2 on the WS upgrade, else HTTP 426.
+    query = urllib.parse.urlencode({"wsTicket": ticket, "orchestrationProtocol": "2"})
+    ws_url = "ws" + origin[len("http") :] + "/ws?" + query
+    try:
+        connection = WebSocket(ws_url, timeout=RPC_TIMEOUT_SECONDS)
+    except T3Error as error:
+        if "426" in str(error):
+            raise T3Error(
+                f"{error} T3 Code now requires orchestrationProtocol=2 on /ws; "
+                "this build of t3-import should already send it — check the server version."
+            ) from error
+        raise
     try:
         connection.send_text(
             json.dumps({"_tag": "Request", "id": "1", "tag": method, "payload": payload, "headers": []})
@@ -234,7 +248,8 @@ def same_path(left: str, right: str) -> bool:
 
 
 def projects(origin: str, token: str) -> list[dict]:
-    return http_json(origin, token, "/api/orchestration/shell").get("projects", [])
+    # T3 Code 0.1.3+ serves projects at /api/projects; /api/orchestration/shell is gone.
+    return http_json(origin, token, "/api/projects").get("projects", [])
 
 
 def command_login(args) -> int:
@@ -327,6 +342,11 @@ def main() -> int:
     import_ = commands.add_parser("import", help="import recent sessions into existing T3 Code projects")
     import_.add_argument("paths", nargs="*", help="project directories (default: every project)")
     import_.set_defaults(run=command_import)
+
+    sync = commands.add_parser("sync", help="same as import (alias)")
+    sync.add_argument("paths", nargs="*", help="project directories (default: every project)")
+    sync.set_defaults(run=command_import)
+
 
     watch = commands.add_parser("watch", help="import repeatedly, for machines without a scheduler")
     watch.add_argument("paths", nargs="*", help="project directories (default: every project)")

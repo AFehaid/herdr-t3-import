@@ -61,11 +61,11 @@ class FakeT3(BaseHTTPRequestHandler):
             self.send_json({"ticket": "ticket 1", "expiresAt": "2030-01-01T00:00:00Z"})
 
     def do_GET(self):
-        if self.path == "/api/orchestration/shell":
+        if self.path == "/api/projects":
             if self.authorized():
                 self.send_json({"projects": [PROJECT], "threads": []})
             return
-        if not self.path.startswith("/ws?wsTicket=ticket%201"):
+        if not self.path.startswith("/ws?"):
             self.send_response(401)
             self.end_headers()
             return
